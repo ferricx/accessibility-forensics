@@ -59,6 +59,28 @@
             margin-bottom: 0.5rem;
         }
 
+        .expertise-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 180px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .credential-badge {
+            min-height: 270px;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .expertise-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .credential-badge {
+                min-height: 270px;
+            }
+        }
+
         .cta-button {
             display: inline-block;
             background-color: #0b3d91;
@@ -106,12 +128,15 @@
             
             <section id="expertise">
                 <h2>Why Partner With Us?</h2>
-                <ul>
-                    <li><strong>15 Years of Elite Credibility:</strong> Led proactive accessibility changes for federal platforms including WhiteHouse.gov and DHS.gov, demonstrating diplomatic execution without adversarial demands.</li>
-                    <li><strong>Certified Leadership:</strong> Current Accessibility Lead at a state agency with Certified Professional in Web Accessibility (CPWA) credentials.</li>
-                    <li><strong>Remediation First Validation:</strong> We do not just point fingers. We provide actionable, developer-friendly techniques so your clients' teams know exactly <em>how</em> to fix code and reduce future surface area for lawsuits.</li>
-                    <li><strong>Exclusive Capacity:</strong> We limit partnerships to 2-3 elite law firms at a time to ensure unquestionable quality and rigorous manual auditing in every report.</li>
-                </ul>
+                <div class="expertise-layout">
+                    <ul>
+                        <li><strong>15 Years of Elite Credibility:</strong> Led proactive accessibility changes for federal platforms including WhiteHouse.gov and DHS.gov, demonstrating diplomatic execution without adversarial demands.</li>
+                        <li><strong>Certified Leadership:</strong> Current Accessibility Lead at a state agency with Certified Professional in Web Accessibility (CPWA) credentials.</li>
+                        <li><strong>Remediation First Validation:</strong> We do not just point fingers. We provide actionable, developer-friendly techniques so your clients' teams know exactly <em>how</em> to fix code and reduce future surface area for lawsuits.</li>
+                        <li><strong>Exclusive Capacity:</strong> We limit partnerships to 2-3 elite law firms at a time to ensure unquestionable quality and rigorous manual auditing in every report.</li>
+                    </ul>
+                    <div class="credential-badge" data-iframe-width="150" data-iframe-height="270" data-share-badge-id="980d94f2-3657-4e58-919e-ea851727d811" data-share-badge-host="https://www.credly.com"></div>
+                </div>
             </section>
 
             <section class="contact-info" id="contact">
@@ -125,5 +150,6 @@
             <p>&copy; 2026 Accessibility Forensics LLC. All rights reserved.</p>
         </footer>
     </div>
+    <script async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
 </html>
