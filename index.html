@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Accessibility Forensics LLC - ADA Title III Defense Auditing for Law Firms">
     <title>Accessibility Forensics LLC - ADA Title III Defense</title>
+    <link rel="preconnect" href="https://challenges.cloudflare.com">
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -187,20 +188,18 @@
             font-style: normal;
         }
 
-        .contact-methods {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
+        .contact-reveal {
             margin: 1.25rem 0 2rem;
         }
 
-        .contact-method {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            min-width: 12rem;
+        .cf-turnstile {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .turnstile-hint {
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
         }
 
         .reveal-contact {
@@ -316,15 +315,12 @@
             <h2>Contact</h2>
             <address>
                 <strong>Christian Ferrier</strong>
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <button class="reveal-contact" type="button" data-contact="email" aria-expanded="false" aria-controls="email-contact">Reveal email address</button>
-                        <span id="email-contact" hidden></span>
-                    </div>
-                    <div class="contact-method">
-                        <button class="reveal-contact" type="button" data-contact="phone" aria-expanded="false" aria-controls="phone-contact">Reveal phone number</button>
-                        <span id="phone-contact" hidden></span>
-                    </div>
+                <div class="contact-reveal">
+                    <button class="reveal-contact" type="button" id="reveal-contact-button" aria-expanded="false" aria-controls="revealed-contact-details" aria-describedby="turnstile-hint" disabled>Reveal contact information</button>
+                    <p class="turnstile-hint" id="turnstile-hint">Complete the check below to enable this button.</p>
+                    <!-- Replace with your own Turnstile site key from the Cloudflare dashboard. -->
+                    <div class="cf-turnstile" data-sitekey="REPLACE_WITH_YOUR_TURNSTILE_SITE_KEY" data-size="flexible" data-callback="onTurnstileVerified" data-expired-callback="onTurnstileExpired" data-error-callback="onTurnstileExpired"></div>
+                    <div id="revealed-contact-details" hidden></div>
                 </div>
                 <noscript>Contact details require JavaScript to protect them from automated spam.</noscript>
             </address>
@@ -332,38 +328,88 @@
         </footer>
     </div>
     <script async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
-        const contactDetails = {
-            email: {
-                label: ['cferrier', 'accessibilityforensics.com'].join('@'),
-                href: ['mailto:cferrier', 'accessibilityforensics.com'].join('@')
-            },
-            phone: {
-                label: ['720', '260', '4848'].join('-'),
-                href: ['tel:+1', '720', '260', '4848'].join('')
-            }
+        let turnstileToken = '';
+
+        const revealButton = document.getElementById('reveal-contact-button');
+        const revealedDetails = document.getElementById('revealed-contact-details');
+        const turnstileHint = document.getElementById('turnstile-hint');
+
+        window.onTurnstileVerified = (token) => {
+            turnstileToken = token;
+            revealButton.disabled = false;
+            turnstileHint.textContent = 'Verified. Click the button above to reveal contact details.';
         };
 
-        document.querySelectorAll('[data-contact]').forEach((button) => {
-            button.addEventListener('click', () => {
-                const contactLabel = button.dataset.contact === 'email' ? 'email address' : 'phone number';
-                const detail = contactDetails[button.dataset.contact];
-                const target = document.getElementById(button.getAttribute('aria-controls'));
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        window.onTurnstileExpired = () => {
+            turnstileToken = '';
+            revealButton.disabled = !revealedDetails.hasChildNodes();
+            turnstileHint.textContent = 'Complete the check below to enable this button.';
+        };
 
-                if (!target.hasChildNodes()) {
-                    const link = document.createElement('a');
+        revealButton.addEventListener('click', async () => {
+            const isExpanded = revealButton.getAttribute('aria-expanded') === 'true';
 
-                    link.className = 'revealed-contact';
-                    link.href = detail.href;
-                    link.textContent = detail.label;
-                    target.append(link);
+            if (isExpanded) {
+                revealButton.setAttribute('aria-expanded', 'false');
+                revealButton.textContent = 'Reveal contact information';
+                revealedDetails.hidden = true;
+                return;
+            }
+
+            if (revealedDetails.hasChildNodes()) {
+                revealButton.setAttribute('aria-expanded', 'true');
+                revealButton.textContent = 'Hide contact information';
+                revealedDetails.hidden = false;
+                return;
+            }
+
+            if (!turnstileToken) {
+                return;
+            }
+
+            revealButton.disabled = true;
+
+            try {
+                const response = await fetch('/api/reveal-contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ turnstileToken }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.ok) {
+                    const emailLink = document.createElement('a');
+                    emailLink.className = 'revealed-contact';
+                    emailLink.href = result.contact.email.href;
+                    emailLink.textContent = result.contact.email.label;
+
+                    const phoneLink = document.createElement('a');
+                    phoneLink.className = 'revealed-contact';
+                    phoneLink.href = result.contact.phone.href;
+                    phoneLink.textContent = result.contact.phone.label;
+
+                    revealedDetails.append('Email: ', emailLink, document.createElement('br'), 'Phone: ', phoneLink);
+                    revealedDetails.hidden = false;
+                    revealButton.setAttribute('aria-expanded', 'true');
+                    revealButton.textContent = 'Hide contact information';
+                    revealButton.disabled = false;
+                } else {
+                    turnstileHint.textContent = result.error || 'Something went wrong. Please try again.';
+                    revealButton.disabled = true;
                 }
+            } catch {
+                turnstileHint.textContent = 'Something went wrong. Please try again.';
+                revealButton.disabled = true;
+            } finally {
+                turnstileToken = '';
 
-                button.setAttribute('aria-expanded', String(!isExpanded));
-                button.textContent = isExpanded ? `Reveal ${contactLabel}` : `Hide ${contactLabel}`;
-                target.hidden = isExpanded;
-            });
+                if (window.turnstile) {
+                    window.turnstile.reset();
+                }
+            }
         });
     </script>
 </body>
