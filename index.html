@@ -100,11 +100,6 @@
             animation: rotate-flipped 8s linear infinite reverse;
         }
 
-        .mitsu-tomoe-wrapper.is-paused .header-logo,
-        .mitsu-tomoe-wrapper.is-paused .header-logo .sub-tomoe {
-            animation-play-state: paused;
-        }
-
         @keyframes rotate {
             from {
                 transform: rotate(0deg);
@@ -125,32 +120,6 @@
             }
         }
 
-        .motion-toggle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 2.75rem;
-            margin-top: 1rem;
-            border: 2px solid #0b3d91;
-            border-radius: 4px;
-            padding: 0.5rem 1rem;
-            color: #0b3d91;
-            background-color: #ffffff;
-            font: inherit;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .motion-toggle:hover,
-        .motion-toggle:focus-visible {
-            color: #ffffff;
-            background-color: #0b3d91;
-        }
-
-        .motion-toggle[aria-pressed="true"] {
-            background-color: #eef2f7;
-        }
-
         @media (prefers-reduced-motion: reduce) {
             .header-logo,
             .header-logo .sub-tomoe {
@@ -159,10 +128,6 @@
 
             .header-logo .sub-tomoe {
                 transform: scaleX(-1);
-            }
-
-            .motion-toggle {
-                display: none;
             }
         }
 
@@ -262,13 +227,6 @@
         }
 
     </style>
-    <noscript>
-        <style>
-            .motion-toggle {
-                display: none;
-            }
-        </style>
-    </noscript>
 </head>
 <body>
     <div class="container">
@@ -329,7 +287,6 @@
                     <p class="tagline">Strategic ADA Title III Defense Auditing for Law Firms</p>
                 </div>
             </div>
-            <button type="button" class="motion-toggle" id="logo-motion-toggle" aria-pressed="false">Pause logo animation</button>
         </header>
 
         <main>
@@ -407,18 +364,6 @@
                 target.hidden = isExpanded;
             });
         });
-
-        const motionToggle = document.getElementById('logo-motion-toggle');
-        const logoWrapper = document.querySelector('.mitsu-tomoe-wrapper');
-
-        if (motionToggle && logoWrapper) {
-            motionToggle.addEventListener('click', () => {
-                const isPaused = logoWrapper.classList.toggle('is-paused');
-
-                motionToggle.setAttribute('aria-pressed', String(isPaused));
-                motionToggle.textContent = isPaused ? 'Play logo animation' : 'Pause logo animation';
-            });
-        }
     </script>
 </body>
 </html>
