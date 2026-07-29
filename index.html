@@ -102,14 +102,51 @@
             font-size: 0.95rem;
             color: #555555;
         }
-        
-        .contact-info {
-            background-color: #eef2f7;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #0b3d91;
-            margin-top: 2rem;
+
+        footer h2 {
+            font-size: 1.5rem;
         }
+
+        footer address {
+            font-style: normal;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 1.25rem 0 2rem;
+        }
+
+        .contact-method {
+            min-width: 12rem;
+        }
+
+        .reveal-contact {
+            min-height: 2.75rem;
+            border: 2px solid #0b3d91;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            color: #0b3d91;
+            background-color: #ffffff;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .reveal-contact:hover,
+        .reveal-contact:focus-visible {
+            color: #ffffff;
+            background-color: #0b3d91;
+        }
+
+        .revealed-contact {
+            display: inline-flex;
+            min-height: 2.75rem;
+            align-items: center;
+        }
+
     </style>
 </head>
 <body>
@@ -125,7 +162,7 @@
                 <p>When clients face ADA Title III demand letters, relying on automated scanning tools is a critical vulnerability. Serial plaintiffs utilize automated scanning algorithms to pick their targets, producing reports filled with false positives that do not represent actual legal barriers.</p>
                 <p><strong>Accessibility Forensics LLC</strong> bridges the gap between legal defense and technical reality. We provide deep manual accessibility auditing and screen reader testing to distinguish real barriers from automated "scanner noise."</p>
             </section>
-            
+
             <section id="expertise">
                 <h2>Why Partner With Us?</h2>
                 <div class="expertise-layout">
@@ -139,17 +176,50 @@
                 </div>
             </section>
 
-            <section class="contact-info" id="contact">
-                <h2>Proactive Risk Management</h2>
-                <p>We empower defense firms with the tools they need to visualize false positives for their clients and offer proactive risk management counsel before an adversarial suit occurs.</p>
-                <p><em>We provide manual audits and practical remediation guidance to help legal and agency teams prioritize real accessibility barriers.</em></p>
-            </section>
         </main>
 
         <footer>
+            <h2>Contact</h2>
+            <address>
+                <strong>Christian Ferrier</strong>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <button class="reveal-contact" type="button" data-contact="email">Reveal email address</button>
+                    </div>
+                    <div class="contact-method">
+                        <button class="reveal-contact" type="button" data-contact="phone">Reveal phone number</button>
+                    </div>
+                </div>
+                <noscript>Contact details require JavaScript to protect them from automated spam.</noscript>
+            </address>
             <p>&copy; 2026 Accessibility Forensics LLC. All rights reserved.</p>
         </footer>
     </div>
     <script async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
+    <script>
+        const contactDetails = {
+            email: {
+                label: ['cferrier', 'accessibilityforensics.com'].join('@'),
+                href: ['mailto:cferrier', 'accessibilityforensics.com'].join('@')
+            },
+            phone: {
+                label: ['720', '260', '4848'].join('-'),
+                href: ['tel:+1', '720', '260', '4848'].join('')
+            }
+        };
+
+        document.querySelectorAll('[data-contact]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const detail = contactDetails[button.dataset.contact];
+                const link = document.createElement('a');
+
+                link.className = 'revealed-contact';
+                link.href = detail.href;
+                link.textContent = detail.label;
+                button.replaceWith(link);
+                link.focus();
+            }, { once: true });
+        });
+    </script>
 </body>
 </html>
