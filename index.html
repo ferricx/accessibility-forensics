@@ -120,6 +120,10 @@
         }
 
         .contact-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
             min-width: 12rem;
         }
 
@@ -184,10 +188,12 @@
                 <strong>Christian Ferrier</strong>
                 <div class="contact-methods">
                     <div class="contact-method">
-                        <button class="reveal-contact" type="button" data-contact="email">Reveal email address</button>
+                        <button class="reveal-contact" type="button" data-contact="email" aria-expanded="false" aria-controls="email-contact">Reveal email address</button>
+                        <span id="email-contact" hidden></span>
                     </div>
                     <div class="contact-method">
-                        <button class="reveal-contact" type="button" data-contact="phone">Reveal phone number</button>
+                        <button class="reveal-contact" type="button" data-contact="phone" aria-expanded="false" aria-controls="phone-contact">Reveal phone number</button>
+                        <span id="phone-contact" hidden></span>
                     </div>
                 </div>
                 <noscript>Contact details require JavaScript to protect them from automated spam.</noscript>
@@ -210,15 +216,24 @@
 
         document.querySelectorAll('[data-contact]').forEach((button) => {
             button.addEventListener('click', () => {
+                const contactLabel = button.dataset.contact === 'email' ? 'email address' : 'phone number';
                 const detail = contactDetails[button.dataset.contact];
-                const link = document.createElement('a');
+                const target = document.getElementById(button.getAttribute('aria-controls'));
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-                link.className = 'revealed-contact';
-                link.href = detail.href;
-                link.textContent = detail.label;
-                button.replaceWith(link);
-                link.focus();
-            }, { once: true });
+                if (!target.hasChildNodes()) {
+                    const link = document.createElement('a');
+
+                    link.className = 'revealed-contact';
+                    link.href = detail.href;
+                    link.textContent = detail.label;
+                    target.append(link);
+                }
+
+                button.setAttribute('aria-expanded', String(!isExpanded));
+                button.textContent = isExpanded ? `Reveal ${contactLabel}` : `Hide ${contactLabel}`;
+                target.hidden = isExpanded;
+            });
         });
     </script>
 </body>
