@@ -41,6 +41,13 @@
             color: #333333;
         }
 
+        header p.mission-statement {
+            font-size: 1rem;
+            font-style: italic;
+            color: #555555;
+            margin-top: 0.25rem;
+        }
+
         a {
             color: #0056b3;
             text-decoration: underline;
@@ -69,7 +76,13 @@
 
         .credential-badge {
             min-height: 270px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 1rem;
+            border: 1px solid #d7dde3;
+            border-radius: 8px;
         }
 
         .brand {
@@ -285,6 +298,7 @@
                 <div class="brand-text">
                     <h1>Accessibility Forensics LLC</h1>
                     <p class="tagline">Strategic ADA Title III Defense Auditing for Law Firms</p>
+                    <p class="mission-statement">Inclusion through empathy, equity, and integrity.</p>
                 </div>
             </div>
         </header>
@@ -305,7 +319,9 @@
                         <li><strong>Remediation First Validation:</strong> We do not just point fingers. We provide actionable, developer-friendly techniques so your clients' teams know exactly <em>how</em> to fix code and reduce future surface area for lawsuits.</li>
                         <li><strong>Exclusive Capacity:</strong> We limit partnerships to 2-3 elite law firms at a time to ensure unquestionable quality and rigorous manual auditing in every report.</li>
                     </ul>
-                    <div class="credential-badge" data-iframe-width="150" data-iframe-height="270" data-share-badge-id="980d94f2-3657-4e58-919e-ea851727d811" data-share-badge-host="https://www.credly.com"></div>
+                    <div class="credential-badge">
+                        <a href="https://www.credly.com/badges/980d94f2-3657-4e58-919e-ea851727d811/public_url" target="_blank" rel="noopener noreferrer">Certified Professional in Web Accessibility (CPWA) &mdash; view credential on Credly (opens in new tab)</a>
+                    </div>
                 </div>
             </section>
 
@@ -326,7 +342,6 @@
             <p>&copy; 2026 Accessibility Forensics LLC. All rights reserved.</p>
         </footer>
     </div>
-    <script async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
         let isVerifying = false;
