@@ -71,9 +71,17 @@ a {
     font-weight: 500;
 }
 
-a:hover, a:focus {
+a:hover {
     color: #003d82;
     text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+.reveal-contact:focus-visible {
+    outline: 3px solid #0b3d91;
+    outline-offset: 2px;
+    text-decoration: underline;
 }
 
 ul {
@@ -304,8 +312,18 @@ article p {
     margin-bottom: 1.25rem;
 }
 
-article blockquote {
+article figure {
     margin: 1.5rem 0;
+}
+
+article figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #555555;
+}
+
+article blockquote {
+    margin: 0;
     padding-left: 1.25rem;
     border-left: 4px solid #0b3d91;
     font-style: italic;
