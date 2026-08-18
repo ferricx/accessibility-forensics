@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The four principles behind web accessibility stated as engineering goals: reach as many senses as possible, work by as many means as possible, ask no more than the task requires, and build to be read by software you did not test.">
+    <title>What Accessibility Asks For - Accessibility Forensics LLC</title>
+    <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="brand-text">
+                    <h1>What Accessibility Asks For</h1>
+                    <p class="tagline">Accessibility Forensics LLC</p>
+                </div>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/approach/">Approach</a></li>
+                    <li><a href="/writing/">Writing</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="main">
+            <article>
+                <p>A website is not one channel. It is a set of claims about content that a browser, a screen reader, a switch, a magnifier, a voice command, and a person under time pressure all have to reconstruct independently. Accessibility is the discipline of making sure each of those reconstructions succeeds without depending on the others.</p>
+
+                <p>The Web Content Accessibility Guidelines organize that work under four principles. They are usually presented as obligations. They are more useful, and more accurate, read as engineering goals.</p>
+
+                <h2>Perceivable: reach as many senses as possible</h2>
+
+                <p>No information should exist in only one sensory channel. Anything carried by sight is carried by text as well. Anything carried by sound is carried by text as well. Anything carried by color alone is carried by shape, position, or wording as well.</p>
+
+                <p>This is redundancy, not decoration. A caption serves a deaf viewer, and it also serves a muted phone in a waiting room. A text alternative serves a blind reader, and it also serves the reader whose image never loaded. The second case is why this is an engineering property rather than a courtesy: the single-channel design has a failure mode, and the redundant one does not.</p>
+
+                <h2>Operable: work by as many means as possible</h2>
+
+                <p>Every action available to a mouse is available to a keyboard, and therefore to everything that presents itself as a keyboard &mdash; switch access, voice control, eye tracking, a remapped game controller, an on-screen keyboard driven by head movement. No input device is the privileged one.</p>
+
+                <p>The corollary is that no interaction should require speed, precision, or a steady hand to complete. A control that can only be reached by holding a cursor over a moving target has assumed a capability, and assumptions of that kind fail quietly. The person who cannot complete the action usually does not report it. They leave.</p>
+
+                <h2>Understandable: ask no more than the task requires</h2>
+
+                <p>Plain language, predictable behavior, and errors that state what went wrong and what to do about it. Navigation that stays where it was. Controls that do what their labels say.</p>
+
+                <p>Simplicity is the means here, not the goal. Some subjects are genuinely complex and cannot be made simple without being made wrong. The goal is that the interface never adds difficulty on top of the subject &mdash; that attention is spent on the task rather than on the mechanism. This is the principle that most often serves people with cognitive and learning disabilities, and it is also the one least well covered by any testable rule, automated or manual.</p>
+
+                <h2>Robust: build to be read by software you did not test</h2>
+
+                <p>Standard markup, honest semantics, and real controls rather than reconstructions of them. A button that is a <code>button</code>. A heading that is a heading because it is marked as one, not because it is large and bold.</p>
+
+                <p>The point is forward compatibility with things outside your control. Assistive technology you have never installed still has to parse the page correctly, and it still has to work after the next browser release, on a version of a screen reader that did not exist when the code was written. Correctness is what makes that survivable. Clever approximations of native controls are what make it fragile.</p>
+
+                <h2>The premise underneath all four</h2>
+
+                <p>Do not assume the person, the device, or the conditions.</p>
+
+                <p>Each principle is redundancy against one of those assumptions failing. That is why the same work reaches further than the population it was written for: a design that survives a blind user with a screen reader also survives a broken trackpad, a cracked screen, direct sunlight, a slow connection, a borrowed phone, and a competent adult who is exhausted. Disability is the case that makes the failure unavoidable rather than intermittent. It is not a separate case.</p>
+
+                <p>Stated as engineering, this is redundancy and fault tolerance. Stated as a matter of how people should be treated, it arrives at the same place from the other side: access is not a favor extended to some users, it is a property the thing either has or lacks. Both readings are true, and neither is needed to justify the other.</p>
+
+                <h2>A principle is not a requirement</h2>
+
+                <p>Everything above is the general idea. Conformance is a narrower matter, and the two should not be conflated, particularly in a dispute.</p>
+
+                <p>WCAG is not measured against its principles. It is measured against numbered success criteria: specific, testable statements that either hold or do not. The principles organize those criteria and explain what they are reaching for, but conformance is determined by the criteria alone. A page can honor a principle imperfectly and still satisfy every criterion beneath it, and a page can satisfy a criterion in a way that serves no one well.</p>
+
+                <p>The distance between the general idea and the testable statement is where most disagreement about accessibility evidence actually lives. It is the subject of <a href="/writing/scan-reports/">What a Scan Report Actually Proves</a>.</p>
+
+                <p>Examination work stays on the narrow side of that line: what the site does, in what environment, reproduced by what steps, measured against which criterion. The principles explain why the criteria exist. They are not what a finding rests on.</p>
+            </article>
+        </main>
+
+        <footer>
+            <h2>Contact</h2>
+            <address>
+                Accessibility Forensics LLC<br>
+                PO Box 315<br>
+                Louviers, CO 80131
+            </address>
+            <p class="mission-statement">Inclusion through empathy, integrity, and equitable access.</p>
+            <p><a href="/">Return to the home page</a></p>
+        </footer>
+    </div>
+</body>
+</html>
