@@ -20,6 +20,7 @@
             <nav class="site-nav" aria-label="Primary">
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="/approach/">Approach</a></li>
                     <li><a href="/writing/">Writing</a></li>
                 </ul>
             </nav>
@@ -63,11 +64,11 @@
 
                 <h2>One defect, counted many times</h2>
 
-                <p>The second property is arithmetic. Automated tools crawl pages and report findings per page, per instance. That is the correct behaviour for a development tool &mdash; an engineer fixing a site wants to see every location. It produces a badly misleading number in a legal document.</p>
+                <p>The second property is arithmetic. Automated tools crawl pages and report findings per page, per instance. That is the correct behavior for a development tool &mdash; an engineer fixing a site wants to see every location. It produces a badly misleading number in a legal document.</p>
 
                 <p>Modern websites are assembled from shared components. A single navigation menu, header, cookie banner, or product-card template is written once and rendered on every page. If that one component has an accessibility defect, a crawl of one hundred pages reports one hundred violations. There is one defect. There is one fix. Fixing it once resolves all one hundred findings simultaneously.</p>
 
-                <p>This is why the raw count in a scan report bears so little relationship to the scale of the underlying problem or the effort required to resolve it. A report listing 312 findings may describe eight distinct defects, six of which live in shared components. That is a materially different picture than the number suggests, and it is directly relevant both to remediation cost and to the plaintiff's characterisation of the site.</p>
+                <p>This is why the raw count in a scan report bears so little relationship to the scale of the underlying problem or the effort required to resolve it. A report listing 312 findings may describe eight distinct defects, six of which live in shared components. That is a materially different picture than the number suggests, and it is directly relevant both to remediation cost and to the plaintiff's characterization of the site.</p>
 
                 <p>The correct unit is the distinct defect, with the number of instances recorded separately. Two findings are the same defect when they share a root cause and one correction resolves both. Determining that requires looking at the site rather than the report &mdash; but it is not difficult, and it is often the single largest reduction available.</p>
 
@@ -77,7 +78,7 @@
 
                 <p>Two categories are worth separating. The first is findings the tool flags but cannot resolve &mdash; axe reports these as &ldquo;incomplete&rdquo; or &ldquo;needs review,&rdquo; and WAVE calls them &ldquo;alerts.&rdquo; These are explicitly requests for a human to look. They are not determinations. When they appear in a demand letter aggregated into a violation count, they are being presented as something their own vendor says they are not.</p>
 
-                <p>The second is findings the tool states affirmatively but which do not survive testing. An image flagged as missing alternative text may be decorative and correctly hidden from assistive technology. A contrast failure may be computed against a background the tool guessed at incorrectly. A form field flagged as unlabelled may be labelled by a mechanism the tool did not follow. In each case the rule fired correctly on the information available to it, and the conclusion is still wrong.</p>
+                <p>The second is findings the tool states affirmatively but which do not survive testing. An image flagged as missing alternative text may be decorative and correctly hidden from assistive technology. A contrast failure may be computed against a background the tool guessed at incorrectly. A form field flagged as unlabeled may be labeled by a mechanism the tool did not follow. In each case the rule fired correctly on the information available to it, and the conclusion is still wrong.</p>
 
                 <p>None of this is a criticism of the tools, and it is worth being accurate about their reach rather than dismissive. Deque, which publishes the axe engine underlying much of the industry, reports that automated testing covered 57 percent of the accessibility issues found across some two thousand audits &mdash; a figure it advances against the lower numbers often quoted, and one it arrives at by counting issues rather than counting success criteria. Automation finds a great deal.</p>
 
