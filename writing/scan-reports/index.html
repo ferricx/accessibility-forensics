@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Why automated accessibility scan reports attached to demand letters overstate what they establish, and what manual testing of the allegation list determines instead.">
     <title>What a Scan Report Actually Proves - Accessibility Forensics LLC</title>
+    <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -120,12 +121,20 @@
         <footer>
             <h2>Contact</h2>
             <address>
-                Accessibility Forensics LLC<br>
-                PO Box 315<br>
-                Louviers, CO 80131
+                <strong>Christian Ferrier</strong>
+                <div class="contact-reveal">
+                    <button class="reveal-contact" type="button" id="reveal-contact-button" aria-expanded="false" aria-controls="revealed-contact-details" aria-describedby="turnstile-hint">Reveal contact information</button>
+                    <p class="turnstile-hint" id="turnstile-hint" aria-live="polite"></p>
+                    <div class="cf-turnstile" id="turnstile-widget" data-sitekey="0x4AAAAAAECEMm6jEvlE8Xki" data-size="flexible" data-appearance="interaction-only" data-execution="execute" data-callback="onTurnstileVerified" data-expired-callback="onTurnstileExpired" data-error-callback="onTurnstileExpired"></div>
+                    <div id="revealed-contact-details" hidden></div>
+                </div>
+                <noscript>Contact details require JavaScript to protect them from automated spam.</noscript>
             </address>
-            <p><a href="/writing/">More writing</a></p>
+            <p class="mission-statement">Inclusion through empathy, integrity, and equitable access.</p>
+            <p>&copy; 2026 Accessibility Forensics LLC. All rights reserved.</p>
         </footer>
     </div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="/assets/contact-reveal.js" defer></script>
 </body>
 </html>
